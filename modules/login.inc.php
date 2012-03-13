@@ -19,9 +19,5 @@ if (!defined('BASE_URL')) {
 } // End of defined() IF.
 ?>
 
-	  <h2>Oh hi!</h2>
-	  <p>Welcome to The Ultimate Sci-Fi Parlour, providing you with nothing but the very best of Sci-fi books and films since 1688.</p>
-	  <h2>Some of our best-selling products:</h2>
-	  <div class="bestselling">
-		  
-	  </div>
+<h2>Log in</h2>
+<p>Oh, welcome. This is where you're meant to have logged in.</p>

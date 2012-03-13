@@ -15,8 +15,8 @@ if (!isset($page_title)) $page_title = 'Default Page Title';
 <body>
 <div id="container">
 	<div id="header">
-	  <h1>your wp project framework</h1>
-	  <p>isn't it good to have a byline?</p>
+	  <h1>The Ultimate Sci-fi Parlour</h1>
+	  <p>Purveyors of fine Sci-fi films and books since 1688.</p>
 	  	<form name="form1" id="form1" method="get" action="index.php">
 	  	<input type="text" name="terms" value="Search..." />
 	  	<input type="hidden" name="p" value="search" />
