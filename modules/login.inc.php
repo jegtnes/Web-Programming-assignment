@@ -1,8 +1,8 @@
 <?php # main.inc.php
 
 /* 
- *	This is the main content module.
- *	This page is included by index.php.
+ *	This is the login page
+ *	
  */
 
 // Redirect if this page was accessed directly:
@@ -17,7 +17,12 @@ if (!defined('BASE_URL')) {
 	exit;
 	
 } // End of defined() IF.
+
+require_once("includes/dbConnect.inc");
 ?>
 
 <h2>Log in</h2>
 <p>Oh, welcome. This is where you're meant to have logged in.</p>
+<?php
+
+?>
