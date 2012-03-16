@@ -26,6 +26,11 @@ switch ($p) {
 		$page_title = 'Log in';
 		break;
 	
+	case 'register':
+		$page = 'register.inc.php';
+		$page_title = 'Register';
+		break;
+	
 	case 'search':
 		$page = 'search.inc.php';
 		$page_title = 'Search Results';
