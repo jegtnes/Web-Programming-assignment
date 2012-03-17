@@ -76,13 +76,7 @@ if (!empty($_POST)) {
 		//This includes the very secure password hashing library phpass: http://www.openwall.com/phpass/ (don't reinvent the square wheel!)
 		require_once("modules/PasswordHash.inc");
 		
-		// Base-2 logarithm of the iteration count used for password stretching
-		$hash_cost_log2 = 8;
-		// Do we require the hashes to be portable to older systems (less secure)?
-		$hash_portable = FALSE;
-		
-		//initialises new phpass PasswordHash object and hashes password
-		$hasher = new PasswordHash($hash_cost_log2, $hash_portable);
+		$hasher = new PasswordHash(8, false);
 		$hashed_password = $hasher->HashPassword($password);
 		
 		//phpass hashes are always 20 chars or more
@@ -148,7 +142,7 @@ if (!$_POST) {
 <label for="reg_email">Email</label>
 <input id="reg_email" name="email" maxlength="50" type="email" value="" />
 <label for="reg_password">Password</label>
-<input id="reg_password" name="password" maxlength="50" type="password" value="" />
+<input id="reg_password" name="password" maxlength="60" type="password" value="" />
 <label for="reg_first_name">First name</label>
 <input id="reg_first_name" name="first_name" maxlength="25" type="text" value="" />
 <label for="reg_surname">Surname</label>
