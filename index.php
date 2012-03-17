@@ -9,6 +9,9 @@
 // Require the configuration file before any PHP code:
 require_once ('./modules/config.inc.php');
 
+//Requires misc. funcs
+require_once("./modules/misc_funcs.php");
+
 // Validate what page to show:
 if (isset($_GET['p'])) {
 	$p = $_GET['p'];
