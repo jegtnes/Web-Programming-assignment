@@ -42,6 +42,11 @@ switch ($p) {
 		$page_title = 'Register';
 		break;
 	
+	case 'logout':
+		$page = 'logout.inc.php';
+		$page_title = 'Logout';
+		break;
+	
 	case 'search':
 		$page = 'search.inc.php';
 		$page_title = 'Search Results';
@@ -64,12 +69,34 @@ if (!file_exists('./modules/' . $page)) {
 // Include the header file:
 include_once ('./includes/header.inc');
 
-
 echo "<div id=\"content\">";
 
+//the GET variable 'a' indicates that an action has been performed.
+if (isset($_GET['a'])) {
+	$a = $_GET['a'];
+	
+	//the message to be returned
+	$m = "";
+	switch($a) {
+		case 'login':
+			$m = "You've successfully logged in!";
+			break;
+		case 'logout':
+			$m = "You've successfully logged out.";
+			break;
+		default:
+			break;
+	}
+	
+	echo "<p class=\"action\">$m</p>";
+	
+}
 // Include the content-specific module:
 // $page is determined from the above switch.
 include ('./modules/' . $page);
+
+include ('./includes/sidebar.inc');
+echo "</div>";
 
 // Include the footer file to complete the template:
 include_once ('./includes/footer.inc');

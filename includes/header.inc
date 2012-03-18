@@ -26,7 +26,7 @@ if (!isset($page_title)) $page_title = 'Default Page Title';
 	
 	<?php include ('navigation.inc'); ?>
 
-	<?php include ('sidebar.inc'); ?>	
+	
 	
 
 

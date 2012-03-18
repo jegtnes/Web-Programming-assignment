@@ -73,11 +73,18 @@ CSS Document For Leaves v1.0 - Anthonyy @ OSWD.org
 			margin-bottom: 10px;
 		}
 		
-		.error {
-			color: #F03;
+		.error,
+		.action {
 			font-size: 16px;
 			font-family: Arial, Helvetica, sans-serif;
-			background-color: #FFF;
+		}
+		
+		.error {
+			color: #F03;
+		}
+		
+		.action {
+			color: #3c0;
 		}
 		
 		/*The search area needs special treatment, apparently. */
@@ -162,7 +169,10 @@ CSS Document For Leaves v1.0 - Anthonyy @ OSWD.org
 /* SIDEBAR ELEMENTS */
 
 		#sidebar {
-			float: right;
+			float: none;
+			position: absolute;
+			right: 30px;
+			top: 106px;
 			width: 175px;
 		}
 		

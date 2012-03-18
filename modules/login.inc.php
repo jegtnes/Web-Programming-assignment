@@ -46,11 +46,10 @@ if (!empty($_POST)) {
 	
 	//if successfully logged in
 	if ($hasher->CheckPassword($password, $hashed_password)) {
-		echo "<p>Welcome back, "  . $result['first_name'] .  "! You're now logged in.";
-		$showloginform = false;
 		$_SESSION["id"] = $result['id'];
 		$_SESSION["name"] = $result['first_name'];
 		$_SESSION["time"] = time();
+		Header("Location: index.php?a=login");
 	}
 	
 	//if login failed
