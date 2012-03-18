@@ -1,5 +1,4 @@
 <?php 
-//session_start();
 
 /* 
  *	This is the login page
@@ -45,12 +44,18 @@ if (!empty($_POST)) {
 	//the hashed password
 	$hashed_password = $result['password'];
 	
+	//if successfully logged in
 	if ($hasher->CheckPassword($password, $hashed_password)) {
 		echo "<p>Welcome back, "  . $result['first_name'] .  "! You're now logged in.";
 		$showloginform = false;
+		$_SESSION["id"] = $result['id'];
+		$_SESSION["name"] = $result['first_name'];
+		$_SESSION["time"] = time();
 	}
 	
+	//if login failed
 	else {
+		echo "<p class=\"error\">Invalid username or password. Please try again.</p>";
 		$showloginform = true;
 	}
 }

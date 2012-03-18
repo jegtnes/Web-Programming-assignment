@@ -103,7 +103,8 @@ if (!empty($_POST)) {
 			}
 			
 			//if successful
-			echo "Congrats! You've successfully registered. You may now proceed to login.";
+			//TODO: Log in after registration
+			echo "<p>Congrats! You've successfully registered. You may now proceed to <a href=\"index.php?p=login\">login</a>.</p>";
 		}
 		
 		
@@ -111,7 +112,7 @@ if (!empty($_POST)) {
 	
 	//if there are errors
 	if ($success == false) {
-		echo "There were some errors, please resolve these and try again: <br />" . nl2br($errors);
+		echo "<p class=\"error\">There were some errors, please resolve these and try again: <br />" . nl2br($errors) . "</p>";
 
 ?>
 
@@ -136,6 +137,8 @@ if (!empty($_POST)) {
 	}
 }
 
+//if no attempt at registering has happened
+//TODO: Combine the two forms into one
 if (!$_POST) {
 ?>
 <form method="POST">

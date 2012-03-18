@@ -1,4 +1,12 @@
-<?php # index.php
+<?php
+session_start();
+if (!@$_SESSION['id']) {
+	$logged_in = false;
+}
+
+else {
+	$logged_in = true;
+}
 
 /* 
  *	This is the main page.
