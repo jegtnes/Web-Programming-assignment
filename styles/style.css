@@ -12,6 +12,7 @@ CSS Document For Leaves v1.0 - Anthonyy @ OSWD.org
 			line-height: 1.6em;
 			color: #666;
 			background-color: #FFF;
+			position: relative;
 		}
 		
 /* GENERAL MOJO AND MULA */
@@ -99,6 +100,9 @@ CSS Document For Leaves v1.0 - Anthonyy @ OSWD.org
 			display: inline;
 		}
 		
+		*[disabled="disabled"] {
+			color: #888;
+		}
 /* HEADER ELEMENTS */
 
 		#header {
@@ -171,7 +175,7 @@ CSS Document For Leaves v1.0 - Anthonyy @ OSWD.org
 		#sidebar {
 			float: none;
 			position: absolute;
-			right: 30px;
+			right: 0;
 			top: 106px;
 			width: 175px;
 		}

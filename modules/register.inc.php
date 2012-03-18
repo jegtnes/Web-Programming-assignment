@@ -24,6 +24,8 @@ require_once("modules/dbConnect.inc");
 <h2>Register</h2>
 
 <?php 
+if ($logged_in) echo "<p>You're already logged in! If you wish to register another account, please <a href=\"index.php?p=logout\">log out</a>.</p>";
+
 //if the form has been submitted
 if (!empty($_POST)) {
 
@@ -102,9 +104,8 @@ if (!empty($_POST)) {
 				$success = false;
 			}
 			
-			//if successful
-			//TODO: Log in after registration
-			echo "<p>Congrats! You've successfully registered. You may now proceed to <a href=\"index.php?p=login\">login</a>.</p>";
+			//if successful, send to login page with a successful register message
+			Header("Location: index.php?p=login&amp;a=register");
 		}
 		
 		
@@ -139,7 +140,7 @@ if (!empty($_POST)) {
 
 //if no attempt at registering has happened
 //TODO: Combine the two forms into one
-if (!$_POST) {
+if (!$logged_in && !$_POST) {
 ?>
 <form method="POST">
 <label for="reg_email">Email</label>

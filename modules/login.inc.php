@@ -27,7 +27,13 @@ require_once("modules/PasswordHash.inc");
 
 $showloginform = true;
 //if the form has been submitted
-if (!empty($_POST)) {
+
+if ($logged_in) {
+	$showloginform = false;
+	echo "<p>You're already logged in!</p>";
+}
+
+else if (!empty($_POST)) {
 
 	//new PasswordHash instance
 	$hasher = new PasswordHash(8, false);
@@ -46,10 +52,20 @@ if (!empty($_POST)) {
 	
 	//if successfully logged in
 	if ($hasher->CheckPassword($password, $hashed_password)) {
-		$_SESSION["id"] = $result['id'];
-		$_SESSION["name"] = $result['first_name'];
-		$_SESSION["time"] = time();
-		Header("Location: index.php?a=login");
+		$_SESSION['acc'] = $result;
+		
+		//if we've logged in from the manage account page whilst logged out
+		if (isset($to_manage)) {
+			Header("Location: index.php?p=manage");
+		}
+	
+		
+		else {
+			Header("Location: index.php?a=login");
+		}
+	
+	
+		
 	}
 	
 	//if login failed

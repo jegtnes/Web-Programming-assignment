@@ -3,7 +3,7 @@
 	<?php
 		if ($logged_in) {
 			//displays user controls if logged in
-			echo("<h2>Welcome, " . @$_SESSION['name'] . "!</h2>
+			echo("<h2>Welcome, " . @$_SESSION['acc']['first_name'] . "!</h2>
 				<p><a href=\"index.php?p=manage\">Manage my account</a> | 
 				<a href=\"index.php?p=logout\">Log out</a></p>");
 		}

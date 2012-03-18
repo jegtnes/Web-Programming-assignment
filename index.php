@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!@$_SESSION['id']) {
+if (!@$_SESSION['acc']['id']) {
 	$logged_in = false;
 }
 
@@ -47,6 +47,11 @@ switch ($p) {
 		$page_title = 'Logout';
 		break;
 	
+	case 'manage':
+		$page = 'manage.inc.php';
+		$page_title = 'Manage your account';
+		break;
+	
 	case 'search':
 		$page = 'search.inc.php';
 		$page_title = 'Search Results';
@@ -84,6 +89,8 @@ if (isset($_GET['a'])) {
 		case 'logout':
 			$m = "You've successfully logged out.";
 			break;
+		case 'register':
+			$m = "You've successfully registered! Please log in below:";
 		default:
 			break;
 	}
