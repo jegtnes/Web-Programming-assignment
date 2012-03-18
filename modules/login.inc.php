@@ -25,24 +25,36 @@ require_once("modules/PasswordHash.inc");
 
 <h2>Log in</h2>
 <?php 
+
+$showloginform = true;
 //if the form has been submitted
 if (!empty($_POST)) {
+
+	//new PasswordHash instance
 	$hasher = new PasswordHash(8, false);
+	
 	$email = $_POST['email'];
+	//the unhashed password
 	$password = $_POST['password'];
 	
-	$login = mysql_query("select password FROM `customer` WHERE `email`='$email';") or die(mysql_error());
+	$login = mysql_query("select * FROM `customer` WHERE `email`='$email';") or die(mysql_error());
 	
-	$pass = mysql_fetch_array($login);
-	$hashed_password = $pass['password'];
+	//stores the customer 
+	$result = mysql_fetch_array($login);
+	
+	//the hashed password
+	$hashed_password = $result['password'];
 	
 	if ($hasher->CheckPassword($password, $hashed_password)) {
-		echo "<br />it's a miracle";
+		echo "<p>Welcome back, "  . $result['first_name'] .  "! You're now logged in.";
+		$showloginform = false;
 	}
 	
-	else echo "<br />aww :(";
+	else {
+		$showloginform = true;
+	}
 }
-
+if ($showloginform) {
 ?>
 <form method="POST">
 <label for="reg_email">Email</label>
@@ -52,5 +64,5 @@ if (!empty($_POST)) {
 <button>Log in</button>
 </form>
 <?php
-
+}
 ?>
