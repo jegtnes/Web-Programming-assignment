@@ -104,8 +104,12 @@ if (!empty($_POST)) {
 				$success = false;
 			}
 			
-			//if successful, send to login page with a successful register message
-			Header("Location: index.php?p=login&amp;a=register");
+			else {
+				//if successful, send to login page with a successful register message
+			Header("Location: index.php?p=login&a=register");
+			}
+			
+			
 		}
 		
 		
