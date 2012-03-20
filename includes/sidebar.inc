@@ -13,6 +13,6 @@
 		}
 	?>
 	<h2>Basket info</h2>
-	<?php echo displayCart();?>
+	<?php print_r(displayCart());?>
 </div>
 <!-- End sidebar -->

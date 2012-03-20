@@ -67,6 +67,11 @@ switch ($p) {
 		$page_title = "Individual product";
 		break;
 	
+	case 'cart':
+		$page = 'cart.inc.php';
+		$page_title = "Your Cart";
+		break;
+	
 	case 'search':
 		$page = 'search.inc.php';
 		$page_title = 'Search Results';
