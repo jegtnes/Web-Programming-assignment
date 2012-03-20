@@ -1,6 +1,7 @@
 <!-- Start sidebar -->
 <div id="sidebar">
 	<?php
+	include_once("modules/cart.inc.php");
 		if ($logged_in) {
 			//displays user controls if logged in
 			echo("<h2>Welcome, " . @$_SESSION['acc']['first_name'] . "!</h2>
@@ -12,6 +13,6 @@
 		}
 	?>
 	<h2>Basket info</h2>
-	<p>Here's where your basket is meant to go.</p>
+	<?php echo displayCart();?>
 </div>
 <!-- End sidebar -->
