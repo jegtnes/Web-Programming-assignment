@@ -27,12 +27,16 @@ require_once("modules/dbConnect.inc");
 $sql = 
 "SELECT *
 FROM product
-INNER JOIN prod_book
-WHERE product.prod_type_id =0";
+NATURAL JOIN prod_book
+WHERE product.prod_type_id =0
+
+LIMIT 0,30";
 
 $get_books = mysql_query($sql) or die(mysql_error());
-$result = mysql_fetch_array($get_books,MYSQL_ASSOC);
+
 echo "<pre>";
-print_r($result);
+while ($row = mysql_fetch_object($get_books)) {
+	print_r($row);
+}
 echo "</pre>";
 ?>
