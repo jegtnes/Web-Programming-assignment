@@ -34,9 +34,14 @@ LIMIT 0,30";
 
 $get_films = mysql_query($sql) or die(mysql_error());
 
-echo "<pre>";
 while ($row = mysql_fetch_object($get_films)) {
-	print_r($row);
+	echo "<div class=\"product\">";
+	echo "<h2>" . $row[''];
+	echo "</div>";
+	
 }
+
+echo "<pre>";
+print_r($row);
 echo "</pre>";
 ?>
