@@ -19,7 +19,7 @@ if (!defined('BASE_URL')) {
 } // End of defined() IF.
 ?>
 
-<h2>Sci-fi Books</h2>
+<h2>Sci-fi Films</h2>
 
 <?php
 require_once("modules/dbConnect.inc");
@@ -27,15 +27,15 @@ require_once("modules/dbConnect.inc");
 $sql = 
 "SELECT *
 FROM product
-NATURAL JOIN prod_book
-WHERE product.prod_type_id = 0
+NATURAL JOIN prod_film
+WHERE product.prod_type_id = 1
 
 LIMIT 0,30";
 
-$get_books = mysql_query($sql) or die(mysql_error());
+$get_films = mysql_query($sql) or die(mysql_error());
 
 echo "<pre>";
-while ($row = mysql_fetch_object($get_books)) {
+while ($row = mysql_fetch_object($get_films)) {
 	print_r($row);
 }
 echo "</pre>";

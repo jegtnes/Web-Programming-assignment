@@ -57,6 +57,11 @@ switch ($p) {
 		$page_title = 'Our Books';
 		break;
 	
+	case 'films':
+		$page = 'films.inc.php';
+		$page_title = 'Our Films';
+		break;
+	
 	case 'search':
 		$page = 'search.inc.php';
 		$page_title = 'Search Results';
