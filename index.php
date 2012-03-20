@@ -62,6 +62,11 @@ switch ($p) {
 		$page_title = 'Our Films';
 		break;
 	
+	case 'product':
+		$page = 'product.inc.php';
+		$page_title = "Individual product";
+		break;
+	
 	case 'search':
 		$page = 'search.inc.php';
 		$page_title = 'Search Results';
@@ -112,9 +117,9 @@ if (isset($_GET['a'])) {
 // $page is determined from the above switch.
 include ('./modules/' . $page);
 
-include ('./includes/sidebar.inc');
-echo "</div>";
 
+echo "</div>";
+include ('./includes/sidebar.inc');
 // Include the footer file to complete the template:
 include_once ('./includes/footer.inc');
 
