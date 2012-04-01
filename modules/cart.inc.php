@@ -2,6 +2,11 @@
 //Tutorial http://v3.thewatchmakerproject.com/journal/276/building-a-simple-php-shopping-cart followed when building this cart
 include_once 'modules/dbConnect.inc';
 
+/**
+ *
+ * @param type $extended Set whether the cart should display the remove option
+ * @return string Returns the cart if it's not empty, if it is, returns string saying it is
+ */
 function displayCart($extended = false) {
 	
 	if (isset($_SESSION['cart'])) {
@@ -14,8 +19,6 @@ function displayCart($extended = false) {
 			$q = $prod['q'];
 			
 			//This statement combines the book and film tables with the main product tables
-			//To avoid getting invalid data, the "AND product.prod_type_id = " in the outer join 
-			//will not assign the properties to the array if they're not appropriate
 			$sql = 
 			"SELECT product.name, product.price
 			FROM product
@@ -39,15 +42,14 @@ function displayCart($extended = false) {
 			
 			//if we're displaying a simple cart or all the cart info
 			if ($extended == true) {
-				
-				//removal of products
+				//display removal of products
 				echo "<td><a href=\"index.php?p=cart&remove&id=$id\">" . "Remove" . "</a></td>";
 			}
 		}
+		
 		echo "<tr><td></td><td>Total</td><td>&pound;$price</td></tr>";
 		echo "</table>";
 		echo "<form action=\"index.php?p=checkout\"><button>Checkout!</button>";
-		//return @$ret;
 	}
 
 	else {
@@ -55,6 +57,13 @@ function displayCart($extended = false) {
 	}
 }
 
+
+/**
+ *
+ * @param type $id The item ID to add to cart - mandatory
+ * @param type $quantity The quantity of items to add to cart, can be left empty (thus defaulting to one)
+ * @return boolean Returns false if the ID isn't valid, true if it is
+ */
 function addToCart($id,$quantity) {
 	
 	//casts the values to ensure they're ints
@@ -104,11 +113,11 @@ function addToCart($id,$quantity) {
 	}
 }
 
-//unset($_SESSION['cart']);
-
-//if removing product
-if (isset($_GET['remove']) && isset($_GET['id'])) {
-	
+/**
+ *
+ * @param type $id The item ID to remove from the cart
+ */
+function removeFromCart($id) {
 	if (isset($_SESSION['cart'])) {
 		
 		//prepares a new cart to replace with the older one
@@ -117,23 +126,30 @@ if (isset($_GET['remove']) && isset($_GET['id'])) {
 		foreach($_SESSION['cart'] as $cart) {
 			
 			//If the product isn't what's being removed, add it to the new cart
-			if($cart['id'] != $_GET['id']) {
+			if($cart['id'] != $id) {
 				$newcart[] = $cart;
 			}
 		}
 		
-		//switches carts
+		//switches carts if there's something in the new cart
 		if(!empty($newcart)) {
 			unset($_SESSION['cart']);
 			$_SESSION['cart'] = $newcart;
 		}
 		
+		//if not, just unset the entire thing. Sorted!
 		else {
 			unset($_SESSION['cart']);
 		}
-		
-		
 	}
+}
+
+//unset($_SESSION['cart']);
+
+//if removing product
+if (isset($_GET['remove']) && isset($_GET['id'])) {
+	
+	removeFromCart($_GET['id']);
 	echo (displayCart(true));
 }
 
@@ -150,9 +166,3 @@ else if (isset($_POST['id']) && (isset($_POST['add']))) {
 else if (isset($_GET['p']) && $_GET['p'] == 'cart')	echo (displayCart(true));
 
 ?>
-<pre>
-<?php
-
-
-?>
-</pre>
