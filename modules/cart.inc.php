@@ -1,5 +1,3 @@
-<h2>Your cart</h2>
-
 <?php
 //Tutorial http://v3.thewatchmakerproject.com/journal/276/building-a-simple-php-shopping-cart followed when building this cart
 include_once 'modules/dbConnect.inc';
@@ -9,10 +7,12 @@ function displayCart($extended = false) {
 	if (isset($_SESSION['cart'])) {
 		$ret = "";
 		echo "<table>";
+		$price = 0;
 		
 		foreach($_SESSION['cart'] as $prod) {
 			$id = $prod['id'];
 			$q = $prod['q'];
+			
 			//This statement combines the book and film tables with the main product tables
 			//To avoid getting invalid data, the "AND product.prod_type_id = " in the outer join 
 			//will not assign the properties to the array if they're not appropriate
@@ -33,7 +33,9 @@ function displayCart($extended = false) {
 			echo "<td><a href=\"index.php?p=product&id=$id\">" . $row['name'] . "</a></td>";
 			
 			//the price
-			echo "<td>" . ($q * $row['price']) . "</td>";
+			echo "<td>&pound;" . $q * $row['price'] . "</td>";
+			
+			$price = $price + ($row['price'] * $q);
 			
 			//if we're displaying a simple cart or all the cart info
 			if ($extended == true) {
@@ -41,10 +43,10 @@ function displayCart($extended = false) {
 				//removal of products
 				echo "<td><a href=\"index.php?p=cart&remove&id=$id\">" . "Remove" . "</a></td>";
 			}
-			
-			
 		}
+		echo "<tr><td></td><td>Total</td><td>&pound;$price</td></tr>";
 		echo "</table>";
+		echo "<form action=\"index.php?p=checkout\"><button>Checkout!</button>";
 		//return @$ret;
 	}
 
@@ -116,10 +118,11 @@ else if (isset($_POST['id'])) {
 	echo (displayCart(true));
 }
 
-//if you didn't want to add something, just display the cart
-else {
-	echo (displayCart(true));
-}
+//if you didn't want to add something (and you are on the cart page, not
+//on an included version, just display the cart
+else if (isset($_GET['p']) && $_GET['p'] == 'cart')	echo (displayCart(true));
+
+
 
 ?>
 <pre>
