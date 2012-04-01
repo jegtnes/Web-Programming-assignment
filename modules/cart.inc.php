@@ -82,22 +82,21 @@ function addToCart($id,$quantity) {
 			$add = true;
 			
 			//loops through cart to check whether item has been added already
-			foreach($_SESSION['cart'] as $thing) {
-				echo "<br />";
-				print_r($thing);
+			//adding a & in front of &cartitem allows you to modify it directly
+			//instead of working off a reference
+			foreach($_SESSION['cart'] as &$cartitem) {
 				
-				//this is where the sweet magic happens
-				if ($thing['id'] == $id) {
+				//if item is in cart already
+				if ($cartitem['id'] == $id) {
 					
-					//make some stuff add up here with quantities and shit
-					echo "this shit is already in here, I ain't gon' stand for that, dawg";
+					//updates the quantity and doesn't add it afterwards
+					$newQ = $quantity + $cartitem['q'];
+					$cartitem['q'] = $newQ;
 					$add = false;
 				}
-				
-				echo "<br />";
 			}
 			
-			
+			//if product should be added
 			if ($add == true) {
 				$_SESSION['cart'][] = array('id' => $id,'q' => $quantity);
 			}
@@ -135,7 +134,7 @@ if (isset($_GET['remove']) && isset($_GET['id'])) {
 		
 		
 	}
-	
+	echo (displayCart(true));
 }
 
 //if you came to the cart wanting to add something
