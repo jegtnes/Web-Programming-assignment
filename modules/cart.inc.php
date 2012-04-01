@@ -59,7 +59,7 @@ function addToCart($id,$quantity) {
 	
 	//casts the values to ensure they're ints
 	$id = intval($id);
-	$quantity = intval($id);
+	$quantity = intval($quantity);
 	
 	//you're going to need the ID to add the product in the first place
 	if (!isset($id)) return false;
@@ -72,12 +72,12 @@ function addToCart($id,$quantity) {
 		//if there's no cart already set, initialise
 		if (!isset($_SESSION['cart'])) {
 			$_SESSION['cart'] = array();
-			$_SESSION['cart'][] = array('id' => $id,'q' => $q);
+			$_SESSION['cart'][] = array('id' => $id,'q' => $quantity);
 		}
 
 		//else add to cart
 		else {
-			$_SESSION['cart'][] = array('id' => $id,'q' => $q);
+			$_SESSION['cart'][] = array('id' => $id,'q' => $quantity);
 		}
 	}
 	
