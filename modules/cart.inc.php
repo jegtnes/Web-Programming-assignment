@@ -75,13 +75,34 @@ function addToCart($id,$quantity) {
 			$_SESSION['cart'][] = array('id' => $id,'q' => $quantity);
 		}
 
-		//else add to cart
+		//if session exists, add to cart
 		else {
-			$_SESSION['cart'][] = array('id' => $id,'q' => $quantity);
+			
+			//whether you should add the product or not;
+			$add = true;
+			
+			//loops through cart to check whether item has been added already
+			foreach($_SESSION['cart'] as $thing) {
+				echo "<br />";
+				print_r($thing);
+				
+				//this is where the sweet magic happens
+				if ($thing['id'] == $id) {
+					
+					//make some stuff add up here with quantities and shit
+					echo "this shit is already in here, I ain't gon' stand for that, dawg";
+					$add = false;
+				}
+				
+				echo "<br />";
+			}
+			
+			
+			if ($add == true) {
+				$_SESSION['cart'][] = array('id' => $id,'q' => $quantity);
+			}
 		}
 	}
-	
-	
 }
 
 //unset($_SESSION['cart']);
