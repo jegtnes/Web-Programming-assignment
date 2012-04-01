@@ -55,6 +55,35 @@ function displayCart($extended = false) {
 	}
 }
 
+function addToCart($id,$quantity) {
+	
+	//casts the values to ensure they're ints
+	$id = intval($id);
+	$quantity = intval($id);
+	
+	//you're going to need the ID to add the product in the first place
+	if (!isset($id)) return false;
+	
+	else {
+		
+		//if quantity isn't set, for some reason, default to 1
+		if (!isset($quantity)) $quantity = 1;
+		
+		//if there's no cart already set, initialise
+		if (!isset($_SESSION['cart'])) {
+			$_SESSION['cart'] = array();
+			$_SESSION['cart'][] = array('id' => $id,'q' => $q);
+		}
+
+		//else add to cart
+		else {
+			$_SESSION['cart'][] = array('id' => $id,'q' => $q);
+		}
+	}
+	
+	
+}
+
 //unset($_SESSION['cart']);
 
 //if removing product
@@ -89,40 +118,16 @@ if (isset($_GET['remove']) && isset($_GET['id'])) {
 }
 
 //if you came to the cart wanting to add something
-else if (isset($_POST['id'])) {
+else if (isset($_POST['id']) && (isset($_POST['add']))) {
 	
-	
-	//TODO: If adding product multiple times, modify quantity instead of adding duplicates
-	$id = $_POST['id'];
-	
-	//if we know the quantity
-	if (isset($_POST['quantity_select'])) {
-		$q = $_POST['quantity_select'];
-	}
-	
-	else {
-		//if the quantity somehow hasn't been specified, default to 1
-		$q = 1;
-	}
+	addToCart($_POST['id'], $_POST['quantity_select']);
 
-	//if there's no cart already set, initialise
-	if (!isset($_SESSION['cart'])) {
-		$_SESSION['cart'] = array();
-		$_SESSION['cart'][] = array('id' => $id,'q' => $q);
-	}
-
-	//else add to cart
-	else {
-		$_SESSION['cart'][] = array('id' => $id,'q' => $q);
-	}
 	echo (displayCart(true));
 }
 
 //if you didn't want to add something (and you are on the cart page, not
 //on an included version, just display the cart
 else if (isset($_GET['p']) && $_GET['p'] == 'cart')	echo (displayCart(true));
-
-
 
 ?>
 <pre>

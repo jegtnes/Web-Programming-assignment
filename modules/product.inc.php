@@ -73,10 +73,11 @@ if ($product['prod_type_id'] == 1) {
 echo "<p>" . $product['description'] . "</p>";
 
 ?>
-<form class="purchase" action="index.php?p=cart" method="post">
+<form class="purchase" action="index.php?p=cart" method="POST">
 	<?php echo "<span class=\"price\">&pound;" . $product['price'] . "</span>";?>
 	<label for="quantity_select">Quantity:</label>
 	<input type="hidden" name="id" value="<?php echo $prod_id?>" />
+	<input type="hidden" name="add" />
 	<select name="quantity_select">
 		<?php
 		$count = $product['stock_level'];
