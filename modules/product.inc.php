@@ -99,7 +99,7 @@ echo "<p>" . $product['description'] . "</p>";
 		}
 		?>
 	</select>
-<button>Buy nao</button>
+<button>Buy</button>
 </form>
 <?php
 echo "</div>";

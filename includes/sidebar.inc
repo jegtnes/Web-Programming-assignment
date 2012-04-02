@@ -12,7 +12,7 @@
 			echo "<h2><a href=\"index.php?p=login\">Log in</a></h2>";
 		}
 	?>
-	<h2>Basket info</h2>
+	<h2><a href="index.php?p=cart">Your Basket</a></h2>
 	<?php print_r(displayCart());?>
 </div>
 <!-- End sidebar -->
