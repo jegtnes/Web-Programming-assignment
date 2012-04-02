@@ -7,7 +7,7 @@ include_once 'modules/dbConnect.inc';
  * @param type $extended Set whether the cart should display the remove option
  * @return string Returns the cart if it's not empty, if it is, returns string saying it is
  */
-function displayCart($extended = false) {
+function displayCart($extended = false, $checkout_btn = true) {
 	
 	if (isset($_SESSION['cart'])) {
 		$ret = "";
@@ -49,7 +49,7 @@ function displayCart($extended = false) {
 		
 		echo "<tr><td></td><td>Total</td><td>&pound;$price</td></tr>";
 		echo "</table>";
-		echo "<form action=\"index.php?p=checkout\"><button>Checkout!</button>";
+		if ($checkout_btn == true) echo "<form method=\"POST\" action=\"index.php?p=checkout_details\"><button>Checkout!</button>";
 	}
 
 	else {

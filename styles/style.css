@@ -219,6 +219,10 @@ CSS Document For Leaves v1.0 - Anthonyy @ OSWD.org
 		
 		label {
 			font-size: 16px;
+		}
+		
+		label[for="quantity_select"] {
+			margin-top: 16px;
 			margin-bottom: -10px;
 		}
 		
@@ -228,6 +232,9 @@ CSS Document For Leaves v1.0 - Anthonyy @ OSWD.org
 			font-size: 16px;
 		}
 		
+		form div {
+			margin-bottom: 20px;
+		}
 		
 
 /* SIDEBAR ELEMENTS */

@@ -11,8 +11,15 @@
 		else {
 			echo "<h2><a href=\"index.php?p=login\">Log in</a></h2>";
 		}
+	
+	//display!=s cart if not on cart or checkout
+	if ($_GET['p'] != "cart" && $_GET['p'] != "checkout_details") {
+		
 	?>
 	<h2><a href="index.php?p=cart">Your Basket</a></h2>
-	<?php print_r(displayCart());?>
+	<?php 
+	print_r(displayCart());
+	}
+	?>
 </div>
 <!-- End sidebar -->
