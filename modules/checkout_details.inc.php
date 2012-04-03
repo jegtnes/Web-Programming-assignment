@@ -9,14 +9,9 @@ $checkout_form = <<<EOT
 <form action="" method="POST" autocomplete="off" >
 			<input type="hidden" name="validate" />
 			<div>
+				<label for="pay_title">Title</label>
+				<input type="text" name="title" id="pay_title" />
 				<label for="pay_bearer">Cardholder's name</label>
-				<select name="title">
-					<option value="Mr">Mr</option>
-					<option value="Mrs">Mrs</option>
-					<option value="Miss">Miss</option>
-					<option value="Sir">Sir</option>
-					<option value="">N/A</option>
-				</select>
 				<input type="text" name="bearer" id="pay_bearer" />
 			</div>
 			
@@ -122,7 +117,7 @@ EOT;
 		
 		//if payment isn't valid
 		if (validatePayment($bearer, $number, $start, $expiry, $card_type) != "") {
-			echo validatePayment($bearer, $number, $start, $expiry, $card_type);
+			echo "<p class=\"error\">" . validatePayment($bearer, $number, $start, $expiry, $card_type) . "</p>";
 			echo $checkout_form;
 		}
 		
@@ -133,13 +128,40 @@ EOT;
 			$number_md5 = md5($number);
 			$api_key = "739a720ade31ad2a14b30aa7b3a6b20e";
 			
-			$url = "http://www.cems.uwe.ac.uk/~pchatter/rest/rest.php?service=cardAuth" .
+			echo $url = "http://www.cems.uwe.ac.uk/~pchatter/rest/rest.php?service=cardAuth" .
 			"&msg_id="			.	$random_num				. 
 			"&num_md5="			.	$number_md5				.
 			"&amount="			.	$cart_price				.
 			"&currency=GBP"	.	
 			"&api_key="			.	$api_key;
 			print_r($api_xml = simplexml_load_string(acquire_file($url)));
+			
+			//if the API returns an error
+			if ($api_xml->error) {
+				echo ("<p class=\"error\">Error encountered: " . $api_xml->error . " (code " . $api_xml->error->attributes()->code . "). Please try again.</p>");
+				echo $checkout_form;
+			}
+			
+			//if the API doesn't return an error
+			else {
+				
+				//if everything is where it's supposed to be, we've won
+				if ($api_xml->attributes()->id == $random_num &&
+				$api_xml->num_md5 == $number_md5 &&
+				$api_xml->bearer == $title . " " . $bearer &&
+				$api_xml->syear == $start &&
+				$api_xml->fyear == $expiry &&
+				$api_xml->type == $card_type) {
+					echo "AWESOME";
+					//do stuff related to winning at life here
+				}
+				
+				else {
+					echo "<p class=\"error\">Looks like there was an unforeseen error there somewhere! Whoops. Please try again.</p>";
+				}
+			}
+			
+			
 		}
 	}
 	

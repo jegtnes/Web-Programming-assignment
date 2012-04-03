@@ -25,8 +25,8 @@ function validatePayment($bearer,$number,$start,$expiry,$card_type) {
 		$error_msg .= "Missing card number.\n";
 	}
 	
-	else if (strlen($number) != 16) {
-		$error_msg .= "Your card number needs to be 16 characters (no spaces)\n";
+	else if (checkLength($number, 13, 16) == false) {
+		$error_msg .= "Your card number needs to be between 13 to 16 characters (no spaces)\n";
 	}
 	
 	//card info section
