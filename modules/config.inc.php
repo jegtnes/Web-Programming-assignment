@@ -14,7 +14,7 @@
 # ***** SETTINGS ***** #
 
 // Errors are emailed here.
-$contact_email = 'address@example.com'; 
+$contact_email = 'alexander2.jegtnes@live.uwe.ac.uk'; 
 
 // Determine whether we're working on a local server
 // or on the real server:
@@ -32,15 +32,14 @@ if ($local) {
 	$debug = TRUE;
 	
 	// Define the constants:
-	define ('BASE_URI', '/path/to/html/folder/');
-	define ('BASE_URL',	'http://localhost/directory/');
-	define ('DB', '/path/to/mysql.inc.php');
+	define ('BASE_URI', 'D:\Documents\University\Stage 2\wp');
+	define ('BASE_URL',	'128.0.0.1/localhost/uni/wp');
 	
 } else {
 
-	define ('BASE_URI', '/path/to/live/html/folder/');
-	define ('BASE_URL',	'http://www.example.com/');
-	define ('DB', '/path/to/live/mysql.inc.php');
+	define ('BASE_URI', '/nas/students/a/as2-jegtnes/unix/public_html/wp');
+	define ('BASE_URL',	'http:/cems.uwe.ac.uk/~as2-jegtnes/wp/assignment');
+
 	
 }
 	

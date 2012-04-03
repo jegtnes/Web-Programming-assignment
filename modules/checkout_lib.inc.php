@@ -18,19 +18,18 @@ function validateCard($bearer,$number,$start,$expiry,$card_type) {
 	}
 	
 	//card number section
-	
 	//strips out anything that isn't a number
-	$card_regex = '/[^0-9]/g';
-	$number = preg_replace($card_regex, "");
+	$number = preg_replace("/[^0-9]/", "", $number);
 	
 	if (empty($number)) {
 		$error_msg .= "Missing card number.";
 	}
 	
-	else if (asd) {
-		//check if 16 digits
+	else if (strlen($number) != 16) {
+		$error_msg .= "Your card number needs to be 16 characters (no spaces)";
 	}
 	
+	//card info section
 	if (empty($start)) {
 		$error_msg .= "Missing start date.";
 	}
@@ -42,6 +41,12 @@ function validateCard($bearer,$number,$start,$expiry,$card_type) {
 	if (empty($card_type)) {
 		$error_msg .= "Missing card type.";
 	}
+	
+	if (empty($error_msg)) {
+		return true;
+	}
+	
+	else return $error_msg;
 	
 }
 

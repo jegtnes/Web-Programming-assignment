@@ -30,7 +30,9 @@ include_once 'modules/cart.inc.php';
 		$expiry = $_POST['exp_month'] . $_POST['exp_year'];
 		$card_type = $_POST['card_type'];
 		
-		
+		if (validateCard($bearer, $number, $start, $expiry, $card_type) != true) {
+			echo this;
+		}
 	}
 	
 	else{
