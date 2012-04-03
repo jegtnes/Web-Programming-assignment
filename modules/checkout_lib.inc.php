@@ -8,13 +8,13 @@
  * @param type $expiry Expiry date, format MMYY
  * @param type $card_type Card type
  */
-function validateCard($bearer,$number,$start,$expiry,$card_type) {
+function validatePayment($bearer,$number,$start,$expiry,$card_type) {
 	
 	$error_msg = "";
 	
 	//cardholder name section
 	if (empty($bearer)) {
-		$error_msg .= "Missing cardholder name.";
+		$error_msg .= "Missing cardholder name.\n";
 	}
 	
 	//card number section
@@ -22,31 +22,28 @@ function validateCard($bearer,$number,$start,$expiry,$card_type) {
 	$number = preg_replace("/[^0-9]/", "", $number);
 	
 	if (empty($number)) {
-		$error_msg .= "Missing card number.";
+		$error_msg .= "Missing card number.\n";
 	}
 	
 	else if (strlen($number) != 16) {
-		$error_msg .= "Your card number needs to be 16 characters (no spaces)";
+		$error_msg .= "Your card number needs to be 16 characters (no spaces)\n";
 	}
 	
 	//card info section
 	if (empty($start)) {
-		$error_msg .= "Missing start date.";
+		$error_msg .= "Missing start date.\n";
 	}
 	
 	if (empty($expiry)) {
-		$error_msg .= "Missing expiry date.";
+		$error_msg .= "Missing expiry date.\n";
 	}
 
 	if (empty($card_type)) {
-		$error_msg .= "Missing card type.";
+		$error_msg .= "Missing card type.\n";
 	}
 	
-	if (empty($error_msg)) {
-		return true;
-	}
-	
-	else return $error_msg;
+	//returns any error messages
+	return nl2br($error_msg);
 	
 }
 

@@ -24,15 +24,19 @@ include_once 'modules/cart.inc.php';
 		print_r($_POST);
 		echo "</pre>";
 		
-		$bearer = $_POST['title'] . $_POST['bearer'] ;
+		$title = $_POST['title'];
+		$bearer = $_POST['bearer'];
 		$number = $_POST['number'];
 		$start = $_POST['start_month'] . $_POST['start_year'];
 		$expiry = $_POST['exp_month'] . $_POST['exp_year'];
 		$card_type = $_POST['card_type'];
 		
-		if (validateCard($bearer, $number, $start, $expiry, $card_type) != true) {
-			echo this;
+		//checks if payment is valid
+		if (validatePayment($bearer, $number, $start, $expiry, $card_type) != "") {
+			echo validatePayment($bearer, $number, $start, $expiry, $card_type);
 		}
+		
+		else echo "this works hoozah";
 	}
 	
 	else{
