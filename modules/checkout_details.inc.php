@@ -6,6 +6,7 @@ include_once 'modules/cart.inc.php';
 
 //TODO: Return actual sent content
 $checkout_form = <<<EOT
+<h4>Your card details</h4>
 <form action="" method="POST" autocomplete="off" >
 			<input type="hidden" name="validate" />
 			<div>
@@ -104,9 +105,6 @@ EOT;
 	
 	//if form has been submitted and will be validated
 	else if (isset($_POST['validate'])) {
-		echo "<pre>";
-		print_r($_POST);
-		echo "</pre>";
 		
 		$title = $_POST['title'];	
 		$bearer = $_POST['bearer'];
@@ -128,13 +126,14 @@ EOT;
 			$number_md5 = md5($number);
 			$api_key = "739a720ade31ad2a14b30aa7b3a6b20e";
 			
-			echo $url = "http://www.cems.uwe.ac.uk/~pchatter/rest/rest.php?service=cardAuth" .
+			$url = "http://www.cems.uwe.ac.uk/~pchatter/rest/rest.php?service=cardAuth" .
 			"&msg_id="			.	$random_num				. 
 			"&num_md5="			.	$number_md5				.
 			"&amount="			.	$cart_price				.
-			"&currency=GBP"	.	
+			"&currency=GBP"		.	
 			"&api_key="			.	$api_key;
-			print_r($api_xml = simplexml_load_string(acquire_file($url)));
+			
+			$api_xml = simplexml_load_string(acquire_file($url));
 			
 			//if the API returns an error
 			if ($api_xml->error) {
@@ -152,12 +151,15 @@ EOT;
 				$api_xml->syear == $start &&
 				$api_xml->fyear == $expiry &&
 				$api_xml->type == $card_type) {
-					echo "AWESOME";
-					//do stuff related to winning at life here
+					//sends user to checkout complete page
+					$_SESSION['complete_checkout'] = true;
+					header("Location: index.php?p=checkout_complete");
 				}
 				
+				//if not, something's gone wrong
 				else {
 					echo "<p class=\"error\">Looks like there was an unforeseen error there somewhere! Whoops. Please try again.</p>";
+					echo $checkout_form;
 				}
 			}
 			
@@ -180,7 +182,7 @@ EOT;
 		<h4>You are buying</h4>
 		<?php echo displayCart(false,false);?>
 		
-		<h4>Your card details</h4>
+		
 		
 		<?php
 			echo $checkout_form;

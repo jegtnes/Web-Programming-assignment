@@ -77,6 +77,11 @@ switch ($p) {
 		$page_title = "Checkout";
 		break;
 	
+	case 'checkout_complete':
+		$page = 'checkout_complete.inc.php';
+		$page_title = "Checkout";
+		break;
+	
 	case 'search':
 		$page = 'search.inc.php';
 		$page_title = 'Search Results';
