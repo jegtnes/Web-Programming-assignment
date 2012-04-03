@@ -12,7 +12,7 @@
 			echo "<h2><a href=\"index.php?p=login\">Log in</a></h2>";
 		}
 	
-	//display!=s cart if not on cart or checkout
+	//displays cart if not on cart or checkout
 	if ($_GET['p'] != "cart" && $_GET['p'] != "checkout_details") {
 		
 	?>

@@ -18,7 +18,22 @@ include_once 'modules/cart.inc.php';
 		?><p class="error">You have no items in your cart! Go shopping for <a href="index.php?p=films">films</a> or <a href="index.php?p=books">books.</a><?php
 	}
 	
-	else {
+	//if form has been submitted and will be validated
+	else if (isset($_POST['validate'])) {
+		echo "<pre>";
+		print_r($_POST);
+		echo "</pre>";
+		
+		$bearer = $_POST['title'] . $_POST['bearer'] ;
+		$number = $_POST['number'];
+		$start = $_POST['start_month'] . $_POST['start_year'];
+		$expiry = $_POST['exp_month'] . $_POST['exp_year'];
+		$card_type = $_POST['card_type'];
+		
+		
+	}
+	
+	else{
 		?>
 		
 		<h4>Confirm/edit your details</h4>
@@ -34,16 +49,16 @@ include_once 'modules/cart.inc.php';
 		<?php echo displayCart(false,false);?>
 		
 		<h4>Your card details</h4>
-		<form action="" method="POST" autocomplete="off">
-			
+		<form action="" method="POST" autocomplete="off" >
+			<input type="hidden" name="validate" />
 			<div>
 				<label for="pay_bearer">Cardholder's name</label>
 				<select name="title">
-					<option value="mr">Mr</option>
-					<option value="mrs">Mrs</option>
-					<option value="miss">Miss</option>
-					<option value="sir">Sir</option>
-					<option value="na">N/A</option>
+					<option value="Mr">Mr</option>
+					<option value="Mrs">Mrs</option>
+					<option value="Miss">Miss</option>
+					<option value="Sir">Sir</option>
+					<option value="">N/A</option>
 				</select>
 				<input type="text" name="bearer" id="pay_bearer" value="<?php echo $_SESSION['acc']['first_name'] . " " . $_SESSION['acc']['surname']?>" />
 			</div>
