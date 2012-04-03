@@ -22,9 +22,10 @@ function getCartTotalPrice() {
 
 			$result = mysql_query($sql) or die(mysql_error());
 			$row = mysql_fetch_array($result, MYSQL_ASSOC);
+			$price = $price + ($row['price']) * $q;
 		}
 	}
-	return $price = $price + ($row['price'] * $q);
+	return $price;
 }
 
 /**
