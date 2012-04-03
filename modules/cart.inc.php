@@ -4,16 +4,37 @@ include_once 'modules/dbConnect.inc';
 
 /**
  *
+ * @return type The total cart price
+ */
+function getCartTotalPrice() {
+	$price = 0;
+	if (isset($_SESSION['cart'])) {
+		foreach($_SESSION['cart'] as $prod) {
+			$id = $prod['id'];
+			$q = $prod['q'];
+
+			//This statement combines the book and film tables with the main product tables
+			$sql = 
+			"SELECT product.name, product.price
+			FROM product
+			WHERE product.product_id = $id
+			";
+
+			$result = mysql_query($sql) or die(mysql_error());
+			$row = mysql_fetch_array($result, MYSQL_ASSOC);
+		}
+	}
+	return $price = $price + ($row['price'] * $q);
+}
+
+/**
+ *
  * @param type $extended Set whether the cart should display the remove option
  * @return string Returns the cart if it's not empty, if it is, returns string saying it is
  */
 function displayCart($extended = false, $checkout_btn = true) {
-	
 	if (isset($_SESSION['cart'])) {
-		$ret = "";
 		echo "<table>";
-		$price = 0;
-		
 		foreach($_SESSION['cart'] as $prod) {
 			$id = $prod['id'];
 			$q = $prod['q'];
@@ -37,9 +58,7 @@ function displayCart($extended = false, $checkout_btn = true) {
 			
 			//the price
 			echo "<td>&pound;" . $q * $row['price'] . "</td>";
-			
-			$price = $price + ($row['price'] * $q);
-			
+					
 			//if we're displaying a simple cart or all the cart info
 			if ($extended == true) {
 				//display removal of products
@@ -47,7 +66,7 @@ function displayCart($extended = false, $checkout_btn = true) {
 			}
 		}
 		
-		echo "<tr><td></td><td>Total</td><td>&pound;$price</td></tr>";
+		echo "<tr><td></td><td>Total</td><td>&pound;" . getCartTotalPrice() . "</td></tr>";
 		echo "</table>";
 		if ($checkout_btn == true) echo "<form method=\"POST\" action=\"index.php?p=checkout_details\"><button>Checkout!</button>";
 	}
