@@ -1,5 +1,5 @@
 <?php # search.inc.php
-
+require_once('modules/dbConnect.inc');
 /* 
  *	This is the search content module.
  *	This page is included by index.php.
@@ -31,15 +31,40 @@ echo '<h2>Search Results</h2>';
 // Display the search results if the form
 // has been submitted.
 if (isset($_GET['terms']) && ($_GET['terms'] != 'Search...') ) {
+$terms = $_GET['terms'];
 
-	// Query the database.
-	// Fetch the results.
-	// Print the results:
-	for ($i = 1; $i <= 10; $i++) {
-		echo <<<EOT
-<h4><a href="#">Search Result #$i</a></h4>
-<p>This is some description. This is some description. This is some description. This is some description.</p>\n
-EOT;
+	$sql = "SELECT DISTINCT *
+	FROM product
+	LEFT OUTER JOIN prod_book ON product.product_id = prod_book.product_id
+	LEFT OUTER JOIN prod_film ON product.product_id = prod_film.product_id
+	WHERE name LIKE '%$terms%' 
+	OR description LIKE '%$terms%' 
+	OR author LIKE '%$terms%' 
+	OR director LIKE '%$terms%' 
+	OR publisher LIKE '%$terms%' 
+	OR studio LIKE '%$terms%'";
+	
+	$results = mysql_query($sql);
+	
+	while ($search = mysql_fetch_object($results)) {
+		echo "<h4><a href=\"index.php?p=product&amp;id=" . $search->product_id ."\">" . $search->name . "</a></h4>";
+		
+		//if the description is a bit too long, truncate it
+		if (strlen($search->description) > 250) {
+			echo "<p>" . substr($search->description,0,250) . "...</p>";
+		}
+		
+		else echo "<p>" . $search->description . "</p>";
+		
+		//if it's a book (which has product type 0) display book-only info
+		if ($search->prod_type_id == 0) {
+			echo "<p>" . $search->author . " | " . $search->publisher . "</p>";
+		}
+		
+		//if it's a film (which has product type 1) display film-only info
+		else if ($search->prod_type_id == 1) {
+			echo "<p>" . $search->director . " | " . $search->studio . "</p>";
+		}
 	}
 
 } else { // Tell them to use the search form.
