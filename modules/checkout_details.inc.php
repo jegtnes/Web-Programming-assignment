@@ -3,7 +3,7 @@
  *	The page where we will get customer details, validate them against basic rules and send to the card clearing REST service
  */
 include_once 'modules/dbConnect.inc';
-include_once 'modules/misc_funcs.inc.php';
+include_once 'modules/misc_funcs.php';
 include_once 'modules/cart.inc.php';
 
 $checkout_form = <<<EOT

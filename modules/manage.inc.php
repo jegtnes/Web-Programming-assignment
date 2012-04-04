@@ -10,6 +10,7 @@ require_once "modules/dbConnect.inc";
 <h2>Manage account</h2>
 <?php 
 	if ($logged_in) {
+		var_dump($_SESSION);
 	?>
 <h2>Your details</h2>
 <label for="reg_email">Email</label>

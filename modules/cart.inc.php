@@ -175,6 +175,7 @@ function removeFromCart($id) {
 if (isset($_GET['remove']) && isset($_GET['id'])) {
 	
 	removeFromCart($_GET['id']);
+	echo "<h2>Your cart</h2>";
 	echo (displayCart(true));
 }
 
@@ -182,7 +183,8 @@ if (isset($_GET['remove']) && isset($_GET['id'])) {
 else if (isset($_POST['id']) && (isset($_POST['add']))) {
 	
 	addToCart($_POST['id'], $_POST['quantity_select']);
-
+	
+	echo "<h2>Your cart</h2>";
 	echo (displayCart(true));
 }
 

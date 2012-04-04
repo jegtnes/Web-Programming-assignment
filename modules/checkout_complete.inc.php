@@ -8,9 +8,7 @@ include_once 'modules/cart.inc.php';
 
 if (!empty($_SESSION['complete_checkout'])) {
 	
-	//makes sure you can't complete the checkout several times
-	unset($_SESSION['complete_checkout']);
-	unset($_SESSION['basket']);
+	
 	$timestamp = time();
 	$price = getCartTotalPrice();
 
@@ -55,6 +53,9 @@ if (!empty($_SESSION['complete_checkout'])) {
 		}
 		
 		else {
+			//makes sure you can't complete the checkout several times
+			unset($_SESSION['complete_checkout']);
+			unset($_SESSION['cart']);
 			?>
 			<h2>Checkout complete!</h2>
 			<p>Thank you for your purchase! You can view this order later from your <a href="index.php?p=manage">account</a> settings.</p>
