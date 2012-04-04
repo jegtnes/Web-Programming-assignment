@@ -6,9 +6,6 @@
 			<li><a href="index.php?p=register">Register</a></li>
 			<li><a href="index.php?p=books">Books</a></li>
 			<li><a href="index.php?p=films">Films</a></li>
-			<li><a href="index.php?p=contact">Contact</a></li>
-			<!--use php to make the following dynamic -->
-			<li><p><strong>A tiny little service announcement.</strong><br/>Put all your little tidbits of information or pictures or dynamic widgets in this area </p></li>
 		</ul>
 </div>
 <!-- Navigation -->
