@@ -68,10 +68,6 @@ CSS Document For Leaves v1.0 - Anthonyy @ OSWD.org
 		button,
 		textarea {
 			display: block;
-			/*box-sizing makes the box model more logical and consistent */
-			-moz-box-sizing: border-box;
-			-webkit-box-sizing: border-box;
-			box-sizing: border-box;
 			width: 200px;
 		}
 		
@@ -88,7 +84,7 @@ CSS Document For Leaves v1.0 - Anthonyy @ OSWD.org
 		}
 		
 		.error {
-			color: #F03;
+			color: #F03;	
 		}
 		
 		.action {
@@ -185,10 +181,10 @@ CSS Document For Leaves v1.0 - Anthonyy @ OSWD.org
 		#content {
 			margin-left: 180px;
 			position: relative;
-			top: -370px;
+			top: -170px;
 			width: 550px;
 			overflow: visible;
-			margin-bottom: -370px;
+			margin-bottom: -170px;
 			min-height: 370px;
 		}
 		
