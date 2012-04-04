@@ -5,13 +5,15 @@ include_once 'modules/cart.inc.php';
 
 if (!empty($_SESSION['complete_checkout'])) {
 	
+	//makes sure you can't complete the checkout several times
+	unset($_SESSION['complete_checkout']);
 	$timestamp = time();
 	$price = getCartTotalPrice();
 	echo "<pre>";
 	print_r($_SESSION);
 	echo "</pre>";
 	
-	$sql = "INSERT INTO customer_order VALUES(NULL, " . $_SESSION['acc']['id'] . ", $timestamp)";
+	$sql = "INSERT INTO customer_order VALUES(NULL, " . $_SESSION['acc']['id'] . ", $timestamp, $price)";
 	
 	//if the query didn't execute
 	if (!mysql_query($sql)) {
