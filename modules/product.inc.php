@@ -1,23 +1,9 @@
-
-<?php # main.inc.php
+<?php 
 
 /* 
- *	This is the main content module.
- *	This page is included by index.php.
+ *	product.inc.php
+ *	This page displays an individual product, determined by the id GET parameter
  */
-
-// Redirect if this page was accessed directly:
-if (!defined('BASE_URL')) {
-
-	// Need the BASE_URL, defined in the config file:
-	require_once ('../includes/config.inc.php');
-	
-	// Redirect to the index page:
-	$url = BASE_URL . 'index.php';
-	header ("Location: $url");
-	exit;
-	
-} // End of defined() IF.
 
 require_once("modules/dbConnect.inc");
 
@@ -80,6 +66,7 @@ echo "<p>" . $product['description'] . "</p>";
 	<input type="hidden" name="add" />
 	<select name="quantity_select">
 		<?php
+		//display the quantity select box
 		$count = $product['stock_level'];
 		
 		//if there's more than 10 products in stock, only allow
@@ -88,7 +75,7 @@ echo "<p>" . $product['description'] . "</p>";
 		
 		for ($count; $count > 0; $count--) {
 			
-			//select 1 by default with selected="selected
+			//select 1 by default with selected="selected"
 			if ($count == 1) {
 				echo "<option selected=\"selected\" name\"" . $count . "\">" . $count . "</option>";
 			}

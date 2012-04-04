@@ -1,22 +1,8 @@
-<?php # main.inc.php
+<?php 
 
-/* 
- *	This is the register page
- *	
+/*	register.inc.php
+ *	The register new account page.
  */
-
-// Redirect if this page was accessed directly:
-if (!defined('BASE_URL')) {
-
-	// Need the BASE_URL, defined in the config file:
-	require_once ('../includes/config.inc.php');
-	
-	// Redirect to the index page:
-	$url = BASE_URL . 'index.php';
-	header ("Location: $url");
-	exit;
-	
-} // End of defined() IF.
 
 require_once("modules/dbConnect.inc");
 ?>
@@ -67,7 +53,7 @@ if (!empty($_POST)) {
 		$success = true;
 		
 		//escapes variables to protect against SQL injections
-		$email =			mysql_real_escape_string($_POST['email']);
+		$email =		mysql_real_escape_string($_POST['email']);
 		$password =		mysql_real_escape_string($_POST['password']);
 		$first_name =	mysql_real_escape_string($_POST['first_name']);
 		$surname =		mysql_real_escape_string($_POST['surname']);
@@ -143,7 +129,6 @@ if (!empty($_POST)) {
 }
 
 //if no attempt at registering has happened
-//TODO: Combine the two forms into one
 if (!$logged_in && !$_POST) {
 ?>
 <form method="POST">

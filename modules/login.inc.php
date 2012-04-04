@@ -1,24 +1,13 @@
 <?php 
 
-/* 
- *	This is the login page
- *	
+/*	login.inc.php
+ *	The login page. Self-explanatory.
  */
 
-// Redirect if this page was accessed directly:
-if (!defined('BASE_URL')) {
-
-	// Need the BASE_URL, defined in the config file:
-	require_once ('modules/config.inc.php');
-	
-	// Redirect to the index page:
-	$url = BASE_URL . 'index.php';
-	header ("Location: $url");
-	exit;
-	
-} // End of defined() IF.
-
 require_once("modules/dbConnect.inc");
+
+//includes a more secure password hashing library, PHPass
+//ensuring that no square wheels are reinvented
 require_once("modules/PasswordHash.inc");
 ?>
 
@@ -26,7 +15,6 @@ require_once("modules/PasswordHash.inc");
 <?php 
 
 $showloginform = true;
-//if the form has been submitted
 
 if ($logged_in) {
 	$showloginform = false;
@@ -58,13 +46,10 @@ else if (!empty($_POST)) {
 		if (isset($to_manage)) {
 			Header("Location: index.php?p=manage");
 		}
-	
 		
 		else {
 			Header("Location: index.php?a=login");
 		}
-	
-	
 		
 	}
 	

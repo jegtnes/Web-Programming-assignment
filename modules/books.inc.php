@@ -1,28 +1,16 @@
-<?php # main.inc.php
+<?php
 
-/* 
- *	This is the main content module.
- *	This page is included by index.php.
+/*	books.inc.php
+ *	This page will output all the books in the database.
  */
 
-// Redirect if this page was accessed directly:
-if (!defined('BASE_URL')) {
-
-	// Need the BASE_URL, defined in the config file:
-	require_once ('../includes/config.inc.php');
-	
-	// Redirect to the index page:
-	$url = BASE_URL . 'index.php';
-	header ("Location: $url");
-	exit;
-	
-} // End of defined() IF.
+require_once("modules/dbConnect.inc");
 ?>
 
 <h2>Sci-fi Books</h2>
 
 <?php
-require_once("modules/dbConnect.inc");
+
 
 $sql = 
 "SELECT *
@@ -33,9 +21,11 @@ LIMIT 0,100";
 
 $get_books = mysql_query($sql) or die(mysql_error());
 
+//loops through the results and outputs the book information
 while ($row = mysql_fetch_object($get_books)) {
+	
 	echo "<div class=\"products\">";
-	echo	"<img src=\"" . $row->image_url . "\" alt=\"\">";
+	echo "<img src=\"" . $row->image_url . "\" alt=\"\">";
 	echo "<h3><a href=\"index.php?p=product&id=" . $row->product_id . "\">" .
 			  $row->name . "</a></h3>\n";
 	echo "<h4>" . $row->author . " (" . $row-> release_year . ")</h4>";

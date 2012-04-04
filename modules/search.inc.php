@@ -1,31 +1,10 @@
-<?php # search.inc.php
-require_once('modules/dbConnect.inc');
-/* 
- *	This is the search content module.
- *	This page is included by index.php.
- *	This page expects to receive $_GET['terms'].
+<?php 
+/*	search.inc.php
+ *	The search page. Gets search terms via the GET parameter "terms"
  */
 
-// Redirect if this page was accessed directly:
-if (!defined('BASE_URL')) {
+require_once('modules/dbConnect.inc');
 
-	// Need the BASE_URL, defined in the config file:
-	require_once ('../includes/config.inc.php');
-	
-	// Redirect to the index page:
-	$url = BASE_URL . 'index.php?p=search';
-	
-	// Pass along search terms?
-	if (isset($_GET['terms'])) {
-		$url .= '&terms=' . urlencode($_GET['terms']);
-	}
-	
-	header ("Location: $url");
-	exit;
-	
-} // End of defined() IF.
-
-// Print a caption:
 echo '<h2>Search Results</h2>';
 
 // Display the search results if the form
@@ -46,6 +25,7 @@ $terms = $_GET['terms'];
 	
 	$results = mysql_query($sql);
 	
+	//loops through search results
 	while ($search = mysql_fetch_object($results)) {
 		echo "<h4><a href=\"index.php?p=product&amp;id=" . $search->product_id ."\">" . $search->name . "</a></h4>";
 		

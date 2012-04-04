@@ -1,6 +1,9 @@
 <?php
+/*	checkout_complete.inc.php
+ *	This page will display if the purchase has gone through the card clearing REST service successfully
+ */
+
 include_once 'modules/dbConnect.inc';
-include_once 'modules/checkout_lib.inc.php';
 include_once 'modules/cart.inc.php';
 
 if (!empty($_SESSION['complete_checkout'])) {
@@ -10,10 +13,7 @@ if (!empty($_SESSION['complete_checkout'])) {
 	unset($_SESSION['basket']);
 	$timestamp = time();
 	$price = getCartTotalPrice();
-	echo "<pre>";
-	print_r($_SESSION);
-	echo "</pre>";
-	
+
 	$sql = "INSERT INTO customer_order VALUES(NULL, " . $_SESSION['acc']['id'] . ", $timestamp, $price)";
 	
 	//if the query didn't execute
@@ -49,13 +49,12 @@ if (!empty($_SESSION['complete_checkout'])) {
 			}
 		}
 		
+		//if for some reason it didn't work
 		if(!mysql_query($sql2)) {
-			//sadtrombone.mid
 			echo "<p class\"error\">Error: " . mysql_error() . ".</p>";
 		}
 		
 		else {
-			//successkid.jpg
 			?>
 			<h2>Checkout complete!</h2>
 			<p>Thank you for your purchase! You can view this order later from your <a href="index.php?p=manage">account</a> settings.</p>
@@ -64,6 +63,6 @@ if (!empty($_SESSION['complete_checkout'])) {
 	}
 }
 
-//if we've not set the complete checkout session var, return home
+//if we've not set the complete checkout session var, something's went wrong, thus return home
 else header("Location: index.php");
 ?>

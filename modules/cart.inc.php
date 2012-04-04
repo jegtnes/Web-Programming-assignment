@@ -1,5 +1,11 @@
 <?php
-//Tutorial http://v3.thewatchmakerproject.com/journal/276/building-a-simple-php-shopping-cart followed when building this cart
+
+/*	cart.inc.php
+ *	This file contains some cart functions that can be used outside of the cart page
+ *	as well as displaying the cart itself
+ */
+
+
 include_once 'modules/dbConnect.inc';
 
 /**
@@ -34,6 +40,8 @@ function getCartTotalPrice() {
  * @return string Returns the cart if it's not empty, if it is, returns string saying it is
  */
 function displayCart($extended = false, $checkout_btn = true) {
+	
+	//if the cart is existent, output the cart
 	if (isset($_SESSION['cart'])) {
 		echo "<table>";
 		foreach($_SESSION['cart'] as $prod) {
@@ -76,7 +84,6 @@ function displayCart($extended = false, $checkout_btn = true) {
 		return "<p>You have no items in your cart.</p>";
 	}
 }
-
 
 /**
  *
@@ -163,8 +170,6 @@ function removeFromCart($id) {
 		}
 	}
 }
-
-//unset($_SESSION['cart']);
 
 //if removing product
 if (isset($_GET['remove']) && isset($_GET['id'])) {

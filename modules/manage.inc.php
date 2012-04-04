@@ -1,7 +1,8 @@
 <?php 
 require_once "modules/dbConnect.inc";
-/* 
- *	This is the manage account page
+/*
+ *	manage.inc.php 
+ *	This manage account page shows you your user information and any completed orders
  */
 
 ?>

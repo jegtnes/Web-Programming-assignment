@@ -95,6 +95,17 @@ CSS Document For Leaves v1.0 - Anthonyy @ OSWD.org
 			color: #3c0;
 		}
 		
+		.button {
+			display: inline-block;
+			width: auto;
+		}
+		
+		input[placeholder] {
+			color: #888;
+			font-size: 12px;
+			line-height: 2;
+		}
+		
 		/*The search area needs special treatment, apparently. */
 		#form1 {
 			float: right;

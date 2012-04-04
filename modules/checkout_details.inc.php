@@ -1,10 +1,11 @@
 <?php
+/*	checkout_details.inc.php
+ *	The page where we will get customer details, validate them against basic rules and send to the card clearing REST service
+ */
 include_once 'modules/dbConnect.inc';
-include_once 'modules/checkout_lib.inc.php';
+include_once 'modules/misc_funcs.inc.php';
 include_once 'modules/cart.inc.php';
 
-
-//TODO: Return actual sent content
 $checkout_form = <<<EOT
 <h4>Your card details</h4>
 <form action="" method="POST" autocomplete="off" >

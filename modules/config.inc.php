@@ -60,7 +60,7 @@ $debug = TRUE;
 
 // Assume debugging is off. 
 if (!isset($debug)) {
-	$debug = true;
+	$debug = false;
 }
 
 # ***** SETTINGS ***** #

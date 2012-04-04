@@ -1,4 +1,8 @@
 <?php 
+/*	logout.inc.php
+ *	Logs out, unsets sessions, closes MySQL connection, returns home
+ */
+
 require_once("modules/dbConnect.inc");
 if ($logged_in) {
 	session_unset();
