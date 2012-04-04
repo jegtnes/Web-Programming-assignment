@@ -27,38 +27,21 @@ require_once "modules/dbConnect.inc";
 <input disabled="disabled" id="reg_postcode" name="postcode" maxlength="8" type="text" value="<?php echo $_SESSION['acc']['postcode']?>" />
 
 <?php
-$sql = "SELECT *
-FROM customer_order, customer
-WHERE customer.id =3
+$customer_id = $_SESSION['acc']['id'];
+$sql = "SELECT DISTINCT		*
+FROM order_items
+JOIN customer_order ON order_items.cu_order_id = customer_order.order_id
+JOIN product ON order_items.cu_product_id = product.product_id
+WHERE customer_order.cu_id = $customer_id
 LIMIT 0 , 30";
 
 $result = mysql_query($sql);
 if (mysql_query($sql)) {
-	
-	//an array to keep the total order IDs
-	//I'm sure there's a much more elegant solution to this
-	$totalOrders;
+	echo "<h2>Your orders</h2>";
 	while ($row = mysql_fetch_object($result)) {
-		$totalOrders[] = $row->order_id;
+		echo "<li> " . $row->quantity . "x " . $row->name . "</li>";
 	}
-	
-	//if the customer has any orders
-	if (!empty($totalOrders)) {
 		
-		foreach($totalOrders as $order) {		
-			$order_sql = "SELECT *
-			FROM order_items, product
-			JOIN customer_order ON customer_order.order_id = $order
-			WHERE product.product_id = order_items.cu_product_id";
-			
-			$orderQ = mysql_query($order_sql);
-			if ($orderQ) {
-				//var_dump(mysql_fetch_row($orderQ));
-			}
-		}
-		
-	}
-	
 }
 
 	}

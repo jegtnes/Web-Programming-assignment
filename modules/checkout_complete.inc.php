@@ -7,6 +7,7 @@ if (!empty($_SESSION['complete_checkout'])) {
 	
 	//makes sure you can't complete the checkout several times
 	unset($_SESSION['complete_checkout']);
+	unset($_SESSION['basket']);
 	$timestamp = time();
 	$price = getCartTotalPrice();
 	echo "<pre>";
